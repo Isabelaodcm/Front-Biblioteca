@@ -1,0 +1,28 @@
+{
+  "name": "__project_name__",
+  "private": true,
+  "type": "module",
+  "packageManager": "pnpm@9.6.0",
+  "description": "__project_description__",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "lint": "biome check --fix --unsafe",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@shined/react-use": "^1.10.2",
+    "@shined/reactive": "^0.2.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "1.9.4",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react-swc": "^3.7.2",
+    "typescript": "^5.7.2",
+    "unocss": "^0.65.0",
+    "vite": "^6.0.2"
+  }
+}
