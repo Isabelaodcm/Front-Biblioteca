@@ -50,6 +50,10 @@ export default {
     },
 
     methods:{
+        async editarEditora(id){
+            this.$router.push(`editar-editora/${id}`)
+        },
+        
         async excluirEditora(id){
             if(!confirm("Tem certeza que deseja excluir essa editora?")) return;
 
@@ -61,6 +65,7 @@ export default {
             if(res.ok){
                 alert("Editora excluída com sucesso!");
                 this.editora = this.editora.filter(((editora) => editora.id !== id ))
+                
             } else {
                 alert("Erro ao excluir. A editora está associada a pelo menos um livro.");
 

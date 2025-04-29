@@ -41,7 +41,7 @@
     </div>
     <div class="input-group">
         <label for="" required>Estado de conservação</label>
-        <select  id="estado" class="opcoes" v-model = "livro.estadoCons">
+        <select  id="estado" class="opcoes1" v-model = "livro.estadoCons">
             <option value="NOVO">Novo</option>
             <option value="BOM">Bom</option>
             <option value="DANIFICADO">Danificado</option>

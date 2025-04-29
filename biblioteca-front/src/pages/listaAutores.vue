@@ -29,7 +29,7 @@
                     <td>{{ autor.anoNasc || '-' }}</td>
                     <td>{{ autor.anoFalesc || '-' }}</td>
                     <td>
-                        <button class="editar" @click="editarAutor(autor.id)"> Editar </button>
+                        <button class="editar" @click="editarAutor(autor)"> Editar </button>
                         <button class="btnExcluir" @click="excluirAutor(autor.id)"> Excluir </button>
                     </td>
 
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-import { RouterLink } from 'vue-router';
 
 export default{
     data(){
@@ -64,9 +63,9 @@ export default{
             }
         },
     
-        async editarAutor(id){
-            window.location.href = `editarAutor.vue?id=${id}`
-            // this.$router.push({name: '/editar-autor', params:{id: autor.id}})
+        async editarAutor(autor){
+            // window.location.href = `editarAutor.vue?id=${id}`
+            this.$router.push({name: 'EditarAutor', params:{id: autor.id}})
         },
 
         async excluirAutor(id){

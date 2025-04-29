@@ -178,7 +178,7 @@ input, textarea, .opcoes, .opcoes1{
     margin-right: 7px;
 }
 
-.btnAcoes:hover, .btnEditar:hover, .btnEditarLivro:hover, .buttonModal:hover, .editar:hover, .btnExcluir:hover, .detalhes:hover{
+.btnAcoes:hover, .btnEditar:hover, .btnEditar1:hover, .buttonModal:hover, .editar:hover, .btnExcluir:hover, .detalhes:hover{
     background-color: #465c46;
 }
 
@@ -197,7 +197,7 @@ input, textarea, .opcoes, .opcoes1{
     box-shadow: 2px 2px 10px #00000033;
 }
 
-.btnEditarLivro{
+.btnEditar1{
     background-color: #668667;
     border: 1px solid #534242;
     border-radius: 7px;
@@ -212,17 +212,8 @@ input, textarea, .opcoes, .opcoes1{
     box-shadow: 2px 2px 10px #00000033;
 }
 
-.closeModal{
-    background-color: #668667;
-    font-size: 25px;
-    margin-top: -10px;
-    /* margin-left: 570px; */
-    padding: 0 10px;
-    cursor: pointer;
-
-}
 /*ajustes especificos cadastro livros*/
-#descricao{
+#obs{
     height: 70px;
     font-family: "Roboto", sans-serif;
     resize: none;
@@ -291,6 +282,8 @@ tbody tr:hover {
 
 /* detalhes livro */
 
+
+
 /* O conteúdo do modal */
 /* .tituloModal{
     background-color: #71ae72;
@@ -298,45 +291,6 @@ tbody tr:hover {
     width: 100%;
 } */
 
-.modalContent {
-    background-color: #e4ebe5;
-    margin: 15% auto;
-    padding-left: 20px;
-    width: 40%;
-    border-radius: 9px;
-    text-align: left;
-    position: absolute;
-    border: 3px solid #534242;
-    margin-top: 110px;
-    margin-left: 500px;
-}
-
-.modal {
-    display: block; 
-    position: fixed; /*isso que faz o fundo ficar escurecido*/
-    z-index: 1; /* Fica acima do conteúdo */
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.4); /* Fundo semitransparente */
-}
-
-.buttonModal{
-    background-color: #668667;
-    border: 1px solid #534242;
-    border-radius: 7px;
-    color: white;
-    padding: 10px;
-    text-align: center;
-    width: 130px;
-    height: 45px;
-    margin-top: 10px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    font-size: 17px;
-    box-shadow: 2px 2px 10px #00000033;
-}
 
 /* login e cadastro */
 .login-content{

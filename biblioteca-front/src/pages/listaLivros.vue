@@ -28,8 +28,27 @@
                 <td>{{ livro.edicao || '-' }}</td>
                 <td>{{ livro.status || '-' }}</td>
                 <td>
-                    <button class="detalhes" @click="detalhesLivro(livro)"> Detalhes </button>
-                    <button class="editar" @click="editarLivro(livro)"> Editar </button>
+                    <button class="detalhes" @click="abrirModal(livro)"> Detalhes </button>
+                    <modalComponent :show = "detalhesLivro" @close = "detalhesLivro = false" style="background-color: #000000;">
+                        <template #titulo>
+                            <h1>Detalhes do livro</h1>
+                        </template>
+
+                        <template #conteudo>
+                            <p><strong>Título: </strong> {{ livroSelecionado.titulo || '-'}}</p>
+                            <p><strong>Autor: </strong> {{ livroSelecionado.autor?.nome || '-'}}</p>
+                            <p><strong>Editora: </strong> {{ livroSelecionado.editora?.nome || '-'}}</p>
+                            <p><strong>Ano de Publicação: </strong> {{ livroSelecionado.anoPublicacao || '-'}}</p>
+                            <p><strong>ISBN: </strong> {{ livroSelecionado.isbn || '-'}}</p>
+                            <p><strong>Edição: </strong> {{ livroSelecionado.edicao || '-'}}</p>
+                            <p><strong>Estado de Conservação: </strong> {{ livroSelecionado.estadoCons || '-'}}</p>
+                            <p><strong>Status: </strong> {{ livroSelecionado.status || '-'}}</p>
+                            <p><strong>Observações: </strong> {{ livroSelecionado.obs || '-'}}</p>
+                        </template>
+
+                    </modalComponent>
+                    
+                    <button class="editar" @click="editarLivro(livro.id)"> Editar </button>
                     <button class="btnExcluir" @click="excluirLivro(livro.id)"> Excluir </button>
                 </td>
 
@@ -39,7 +58,7 @@
 </template>
 
 <script>
-import ListaAutores from './listaAutores.vue';
+import modalComponent from '@/components/modalComponent.vue';
 
 export default {
     mounted(){
@@ -48,11 +67,25 @@ export default {
 
     data(){
         return{
-            livros: []
+            livros: [],
+            // detalhesLivro: false
+            detalhesLivro: false,
+            livroSelecionado: {}
         };
     },
+    
+    components: { modalComponent },
 
     methods: {
+        async editarLivro(id){
+            this.$router.push(`/editar-livro/${id}`)
+        },
+        
+        async abrirModal(livro){
+            this.livroSelecionado = livro;
+            this.detalhesLivro = true;
+        },
+
         async excluirLivro(id){
             if (!confirm("Tem certeza que deseja excluir esse livro?")) return;
 

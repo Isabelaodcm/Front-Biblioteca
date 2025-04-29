@@ -11,6 +11,7 @@ import CadastroAutor from '@/pages/cadastroAutor.vue';
 import CadastroEditora from '@/pages/cadastroEditora.vue';
 import CadastroEmp from '@/pages/cadastroEmp.vue';
 import CadastroCliente from '@/pages/cadastroCliente.vue';
+import EditarLivro from '@/pages/editarLivro.vue';
 
 const routes = [
     {
@@ -30,6 +31,11 @@ const routes = [
 
   },
   {
+    path: '/editar-livro/:id',
+    name: 'EditarLivro',
+    component: () => import ('@/pages/editarLivro.vue')
+  },
+  {
     path: '/cadastro-autor',
     name: 'CadastroAutor',
     component: CadastroAutor,
@@ -40,9 +46,9 @@ const routes = [
     component: ListaAutores,
   },
   {
-    path: '/editar-autor',
+    path: '/editar-autor/:id',
     name: 'EditarAutor',
-    component: EditarAutor,
+    component: () => import ('@/pages/editarAutor.vue')
   },
   {
 
@@ -55,6 +61,11 @@ const routes = [
     name: 'ListaEditoras',
     component: listaEditoras
 
+  },
+  {
+    path: '/editar-editora/:id',
+    name: 'EditarEditora',
+    component: () => import('@/pages/editarEditora.vue')
   },
   {
     path: '/cadastro-emprestimo',
