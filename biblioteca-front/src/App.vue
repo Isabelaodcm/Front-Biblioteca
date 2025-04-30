@@ -239,10 +239,10 @@ input, textarea, .opcoes, .opcoes1{
     color: white;
     padding: 10px;
     text-align: center;
-    width: 120px;
-    height: 40px;
+    /* width: 120px;
+    height: 40px; */
     margin-left: 15px;
-    font-weight: bold;
+    /* font-weight: bold; */
     font-size: 15px;
     box-shadow: 2px 2px 10px #00000033;
 }

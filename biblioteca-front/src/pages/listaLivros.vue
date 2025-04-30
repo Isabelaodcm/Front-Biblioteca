@@ -1,8 +1,9 @@
 <template>
   <h1> Todos os Livros </h1>
   <div class="searchbar">
-        <input type="text" class = "input-searchbar" placeholder="Pesquisar livro...">
-        <button class="btn-search">Pesquisar</button>
+        <input type="text" class = "input-searchbar" placeholder="Pesquisar livro..." v-model="termoBusca" @input="pesquisaLivro">
+        <!-- <button class="btn-search">Pesquisar</button> -->
+        <button class="btn-search" @click="toCadastro()"> Adicionar Livro </button>
     
     </div>
     <table>
@@ -29,7 +30,14 @@
                 <td>{{ livro.status || '-' }}</td>
                 <td>
                     <button class="detalhes" @click="abrirModal(livro)"> Detalhes </button>
-                    <modalComponent :show = "detalhesLivro" @close = "detalhesLivro = false" style="background-color: #000000;">
+                    
+                    <button class="editar" @click="editarLivro(livro.id)"> Editar </button>
+                    <button class="btnExcluir" @click="excluirLivro(livro.id)"> Excluir </button>
+                </td>
+
+            </tr>
+
+            <modalComponent :show = "detalhesLivro" @close = "detalhesLivro = false" style="background-color: #000000;">
                         <template #titulo>
                             <h1>Detalhes do livro</h1>
                         </template>
@@ -47,12 +55,6 @@
                         </template>
 
                     </modalComponent>
-                    
-                    <button class="editar" @click="editarLivro(livro.id)"> Editar </button>
-                    <button class="btnExcluir" @click="excluirLivro(livro.id)"> Excluir </button>
-                </td>
-
-            </tr>
         </tbody>
     </table>
 </template>
@@ -70,13 +72,19 @@ export default {
             livros: [],
             // detalhesLivro: false
             detalhesLivro: false,
-            livroSelecionado: {}
+            livroSelecionado: {},
+            termoBusca: ''
         };
     },
     
     components: { modalComponent },
 
     methods: {
+
+        toCadastro(){
+            this.$router.push('cadastro-livro');
+        },
+        
         async editarLivro(id){
             this.$router.push(`/editar-livro/${id}`)
         },
@@ -119,7 +127,26 @@ export default {
                 console.error(error);
             }
 
-        }
+        },
+
+        async pesquisaLivro(){
+            const termo =  this.termoBusca.trim();
+            if(termo == ''){
+                this.listaLivros();
+    
+            }
+
+            try{
+                const res = await fetch(`http://localhost:8080/livro/pesquisa?titulo=${encodeURIComponent(termo)}`);
+                if(!res.ok) throw new Error("Erro na busca");
+                this.livros = await res.json();
+
+            } catch(error){
+                console.error("Erro na busca: ", error);
+            }
+        },
+        
+
     }
 }
 </script>

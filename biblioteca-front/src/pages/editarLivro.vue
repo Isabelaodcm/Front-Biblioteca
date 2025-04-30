@@ -11,7 +11,7 @@
     </div>
     <div class="input-group">
         <label for="autor"> Autor </label>
-        <select id="autor" class="opcoes1" v-model = "livro.autorId" required>
+        <select id="autor" class="opcoes1" v-model = "livro.autor.id" required>
             <option value=""> Selecione um autor </option>
             <option v-for = "autor in autores" :key = "autor.id" :value="autor.id">
                 {{ autor.id }} - {{ autor.nome }}
@@ -24,7 +24,7 @@
     </div>
     <div class="input-group">
         <label for="editora"> Editora </label>
-        <select id="editora" class="opcoes1" v-model = "livro.editoraId" required>
+        <select id="editora" class="opcoes1" v-model = "livro.editora.id" required>
             <option value=""> Selecione uma editora </option>
             <option v-for = "editora in editoras" :key="editora.id" :value="editora.id">
                 {{ editora.id }} - {{ editora.nome }}
@@ -74,31 +74,77 @@ export default {
                 edicao: "",
                 obs: "",
                 estadoCons: "",
-                autorId: "",   // <--- armazena só o ID
-                editoraId: "" 
+                autor: { id: ""},
+                editora: { id: ""}
             },
             autores: [],
             editoras: []
         }
     },
 
+    mounted(){
+        this.carregarAutores();
+        this.carregarEditoras();
+    },
+
     async created(){
         const id = this.$route.params.id;
         try{
-            const [livroRes, autorRes, editoraRes] = await Promise.all([
-            fetch(`http://localhost:8080/livro/busca-livro/${id}`),
-            fetch(`http://localhost:8080/autor/lista-autores`),
-            fetch(`http://localhost:8080/editora/lista-editoras`)
+            const res = await fetch(`http://localhost:8080/livro/busca-livro/${id}`);
 
-        ]);
-
-        this.livro = await livroRes.json();
-        this.autor = await autorRes.json();
-        this.editora = await editoraRes.json();
+        this.livro = await res.json();
+        // this.autor = await autorRes.json();
+        // this.editora = await editoraRes.json();
 
         } catch(error){
             alert("Erro ao carregar os dados do livro.");
             console.error("Erro ao carregar dados: ", error);
+        }
+    },
+
+    methods:{
+
+       async editarLivro(){
+            try{
+                const dadosJson = JSON.stringify(this.livro);
+                const res = await fetch(`http://localhost:8080/livro/editar/${this.livro.id}`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json'},
+                    body: dadosJson
+                })
+
+                if(res.ok){
+                    alert("Livro editado com sucesso!");
+                    this.$router.push('/lista-livros');
+                }
+
+            }catch(error){
+                alert("Não foi possível salvar as alterações.");
+                console.error("Erro ao editar: ", error);
+            }
+        },
+
+        async carregarAutores(){
+            try{
+                const res = await fetch(`http://localhost:8080/autor/lista-autores`);
+                this.autores = await res.json();
+    
+            } catch (error) {
+                console.error("Erro ao carregar os autores: ", error);
+            }
+        },
+
+        async carregarEditoras(){
+            try{
+                const res = await fetch(`http://localhost:8080/editora/lista-editoras`);
+                this.editoras = await res.json();
+            } catch (error) {
+                console.error("Erro ao carregar as editoras: ", error);
+            }
+        }, 
+
+        cancelar(){
+            this.$router.push('/lista-livros');
         }
     }
 }

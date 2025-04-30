@@ -78,6 +78,11 @@ const routes = [
     component: ListaEmprestimos
   },
   {
+    path: '/editar-emp/:id',
+    name: 'EditarEmp',
+    component: () => import('@/pages/editarEmp.vue')
+  },
+  {
     path: '/cadastro-cliente',
     name: 'CadastrarCliente',
     component: CadastroCliente

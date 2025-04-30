@@ -3,6 +3,8 @@
   <div class="searchbar">
         <input type="text" class="input-searchbar" placeholer = "Pesquisar editora...">
         <button class="btn-search">Pesquisar</button>
+        <button class="btn-search" @click="toCadastro()"> Adicionar Editora </button>
+
   </div>
   <table>
     <thead>
@@ -50,6 +52,10 @@ export default {
     },
 
     methods:{
+        toCadastro(){
+            this.$router.push('/cadastro-editora');
+        },
+
         async editarEditora(id){
             this.$router.push(`editar-editora/${id}`)
         },
@@ -86,6 +92,8 @@ export default {
             }
 
         }
+
+
     }
 
 }

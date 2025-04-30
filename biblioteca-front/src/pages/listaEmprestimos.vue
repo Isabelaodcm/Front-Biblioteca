@@ -3,6 +3,8 @@
   <div class="searchbar">
     <input type="text" class="input-searchbar" placeholder="Pesquisar empréstimos...">
     <button class="btn-search"> Pesquisar </button>
+    <button class="btn-search" @click="toCadastro()"> Adicionar Empréstimo </button>
+
   </div>
   <table >
     <thead>
@@ -25,7 +27,7 @@
             <td>{{ emp.dataDev }}</td>
             <td>{{ emp.status }}</td>
             <td>
-                <button class="editar">Editar</button>
+                <button class="editar" @click = "editarEmp(emp.id)">Editar</button>
                 <button class="btnExcluir" @click="excluirEmp(emp.id)">Excluir</button>
             </td>
         </tr>
@@ -46,6 +48,15 @@ export default {
     },
 
     methods: {
+        toCadastro(){
+            this.$router.push('/cadastro-emprestimo');
+        },
+
+        async editarEmp(id){
+            this.$router.push(`/editar-emp/${id}`);
+
+        },
+
         async excluirEmp(id){
             if (!confirm("Tem certeza que deseja excluir esse empréstimo?")) return;
             try{

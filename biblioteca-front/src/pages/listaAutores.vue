@@ -4,8 +4,9 @@
 
         <div class="searchbar">
             <input type="text" class = "input-searchbar" placeholder="Pesquisar autor...">
-            <button class="btn-search">Pesquisar</button>
-
+            <!-- <button class="btn-search">Pesquisar</button> -->
+            <button class="btn-search" @click="toCadastro()"> Adicionar Autor </button>
+            
         </div>
         <table>
             <thead>
@@ -53,6 +54,10 @@ export default{
     },
 
     methods: {
+        toCadastro(){
+            this.$router.push('/cadastro-autor');
+        },
+
         async listaAutores() {
             try{
                 const response = await fetch(`http://localhost:8080/autor/lista-autores`);
@@ -87,6 +92,7 @@ export default{
         }
     }
     },
+
     mounted(){
         this.listaAutores();
         const autorId = this.$route.params.id;
