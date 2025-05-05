@@ -3,7 +3,7 @@
         <h1> Todos os autores </h1>
 
         <div class="searchbar">
-            <input type="text" class = "input-searchbar" placeholder="Pesquisar autor...">
+            <input type="text" class = "input-searchbar" placeholder="Pesquisar autor..." v-model="termoBusca" @input="pesquisaAutor">
             <!-- <button class="btn-search">Pesquisar</button> -->
             <button class="btn-search" @click="toCadastro()"> Adicionar Autor </button>
             
@@ -48,7 +48,8 @@
 export default{
     data(){
         return{
-            autores: []
+            autores: [], 
+            termoBusca: ''
 
         };
     },
@@ -90,13 +91,29 @@ export default{
         } catch (error) {
             alert("Erro ao excluir.");
         }
-    }
+    },
+
+        async pesquisaAutor(){
+            const termo = this.termoBusca.trim();
+            if(termo == ''){
+                this.listaAutores();
+            }
+
+            try{
+                const res = await fetch(`http://localhost:8080/autor/pesquisar?nome=${encodeURIComponent(termo)}`);
+                if(!res.ok) throw new Error("Erro na busca");
+                this.autores = await res.json();
+
+            }catch(error){
+                console.error("Erro ao buscar: ", error);
+            }
+        }
     },
 
     mounted(){
         this.listaAutores();
-        const autorId = this.$route.params.id;
-        console.log('ID do autor:', autorId);
+        // const autorId = this.$route.params.id;
+        // console.log('ID do autor:', autorId);
     }
 }
 

@@ -37,7 +37,7 @@
 
             </tr>
 
-            <modalComponent :show = "detalhesLivro" @close = "detalhesLivro = false" style="background-color: #000000;">
+            <modalComponent :show = "detalhesLivro" @close = "detalhesLivro = false">
                         <template #titulo>
                             <h1>Detalhes do livro</h1>
                         </template>

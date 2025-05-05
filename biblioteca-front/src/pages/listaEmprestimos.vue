@@ -2,7 +2,7 @@
   <h1> Todos os Empréstimos </h1>
   <div class="searchbar">
     <input type="text" class="input-searchbar" placeholder="Pesquisar empréstimos...">
-    <button class="btn-search"> Pesquisar </button>
+    <!-- <button class="btn-search"> Pesquisar </button> -->
     <button class="btn-search" @click="toCadastro()"> Adicionar Empréstimo </button>
 
   </div>

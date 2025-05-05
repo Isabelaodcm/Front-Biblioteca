@@ -1,8 +1,8 @@
 <template>
   <h1> Todas as Editoras </h1>
   <div class="searchbar">
-        <input type="text" class="input-searchbar" placeholer = "Pesquisar editora...">
-        <button class="btn-search">Pesquisar</button>
+        <input type="text" class="input-searchbar" placeholder = "Pesquisar editora..." v-model="termoBusca" @input="pesquisaEditora">
+        <!-- <button class="btn-search">Pesquisar</button> -->
         <button class="btn-search" @click="toCadastro()"> Adicionar Editora </button>
 
   </div>
@@ -47,7 +47,8 @@ export default {
   
     data(){
         return{
-            editoras:[]
+            editoras:[], 
+            termoBusca: ''
         };
     },
 
@@ -91,6 +92,22 @@ export default {
                 console.error(error);
             }
 
+        },
+
+        async pesquisaEditora(){
+            const termo = this.termoBusca.trim();
+            if(termo == ''){
+                this.listaEditoras();
+            }
+
+            try{
+                const res = await fetch(`http://localhost:8080/editora/pesquisar?nome=${encodeURIComponent(termo)}`);
+                if(!res.ok) throw new Error("Erro na busca");
+                this.editoras = await res.json();
+
+            } catch(error){
+                console.error("Erro na busca: ", error);
+            }
         }
 
 

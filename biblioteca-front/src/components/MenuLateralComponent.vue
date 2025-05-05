@@ -2,27 +2,27 @@
    <nav class = "barra-lateral">
     <h2 class = "menu" >Menu</h2>
     <ul>
-        <li @click="mostrarMenu('livros')" >
+        <li @click="mostrarMenu('livros')">
             Livros
             <ul v-show="menus.livros">
-                <li> <RouterLink to="/cadastro-livro"> Cadastrar Livro</RouterLink> </li>
-                <li> <RouterLink to = "/lista-livros"> Todos os Livros </RouterLink></li>
+                <li> <RouterLink to="/cadastro-livro" @click.stop> Cadastrar Livro</RouterLink> </li>
+                <li> <RouterLink to = "/lista-livros" @click.stop> Todos os Livros </RouterLink></li>
             </ul>
         </li>
 
         <li @click = "mostrarMenu('autores')">
             Autores
             <ul v-show = "menus.autores">
-                <li> <RouterLink to = "/cadastro-autor"> Cadastrar Autor </RouterLink></li>
-                <li><RouterLink to="/lista-autores">Todos os Autores</RouterLink></li>
+                <li> <RouterLink to = "/cadastro-autor" @click.stop> Cadastrar Autor </RouterLink></li>
+                <li><RouterLink to="/lista-autores" @click.stop>Todos os Autores</RouterLink></li>
             </ul>
         </li>
        
         <li @click="mostrarMenu('editoras')">
             Editoras
             <ul v-show="menus.editoras">
-                <li> <RouterLink to = "/cadastro-editora"> Cadastrar Editora </RouterLink></li>
-                <li><RouterLink to="/lista-editoras"> Todas as Editoras </RouterLink></li>
+                <li> <RouterLink to = "/cadastro-editora" @click.stop> Cadastrar Editora </RouterLink></li>
+                <li><RouterLink to="/lista-editoras" @click.stop> Todas as Editoras </RouterLink></li>
             </ul>
 
         </li>
@@ -30,9 +30,9 @@
         <li @click="mostrarMenu('emp')">
             Empréstimos
             <ul v-show="menus.emp">
-                <li> <RouterLink to = "/cadastro-emprestimo"> Cadastrar Empréstimo </RouterLink></li>
-                <li><RouterLink to= "/lista-emprestimos">Todos os Empréstimos</RouterLink> </li>
-                <li> <RouterLink to = "/cadastro-cliente"> Cadastrar Cliente </RouterLink></li>
+                <li> <RouterLink to = "/cadastro-emprestimo" @click.stop> Cadastrar Empréstimo </RouterLink></li>
+                <li><RouterLink to= "/lista-emprestimos" @click.stop>Todos os Empréstimos</RouterLink> </li>
+                <li> <RouterLink to = "/cadastro-cliente" @click.stop> Cadastrar Cliente </RouterLink></li>
                 
             </ul>
         </li>
@@ -82,8 +82,9 @@ const menus = ref({
 
     
 }
+
 .barra-lateral ul{
-    padding: 10px;
+    padding: 7px;
     display: block;
     line-height: 25px;
     list-style: none;
@@ -91,6 +92,9 @@ const menus = ref({
     font-size: 19px;
     cursor: pointer;
 
+}
+.barra-lateral ul li{
+    margin: 8px;
 }
 
 .barra-lateral ul li a:hover{
@@ -105,7 +109,7 @@ const menus = ref({
     border: none;
     /* border: 2px solid #5e995f; */
     /* border: 2px solid #8AB88B; */
-    padding: 5px;
+    padding: 4px;
     text-align: left;
     /* font-weight: 450;
     font-size: 19px; */
